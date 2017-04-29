@@ -1,7 +1,9 @@
 package ninenine.com.duplicateuser.repository
 
-/**
- * Created by rafaelkerr on 4/29/17.
- */
+import io.reactivex.Flowable
+import ninenine.com.duplicateuser.domain.User
+
 interface UserRepository {
+    fun getUsersWithSet(): Flowable<Set<User>>
+    fun getUsersWithList(): Flowable<List<User>>
 }

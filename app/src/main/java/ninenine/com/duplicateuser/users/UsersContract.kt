@@ -7,7 +7,7 @@ import ninenine.com.duplicateuser.domain.User
 interface UsersContract {
 
     interface View : BaseView<Presenter> {
-        fun showUsers(users: Set<User>)
+        fun showUsers(users: Collection<User>)
     }
 
     interface Presenter : BasePresenter {
