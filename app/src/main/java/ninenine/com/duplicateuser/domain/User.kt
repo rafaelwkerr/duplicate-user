@@ -1,7 +1,7 @@
 package ninenine.com.duplicateuser.domain
 
-/**
- * Created by rafaelkerr on 9/7/17.
- */
-class User {
-}
+data class User(val id: String,
+                val name: String,
+                val image: String,
+                val birthday: String,
+                val bio: String)
