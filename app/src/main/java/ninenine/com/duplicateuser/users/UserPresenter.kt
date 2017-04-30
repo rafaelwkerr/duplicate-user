@@ -1,6 +1,5 @@
 package ninenine.com.duplicateuser.users
 
-import io.reactivex.schedulers.Schedulers
 import ninenine.com.duplicateuser.repository.UserRepository
 
 
@@ -11,27 +10,11 @@ class UserPresenter constructor(val userRepository: UserRepository,
         usersView.presenter = this
     }
 
-
     override fun start() {
 
     }
-
     override fun loadUsers() {
-
-        val users = userRepository.getUsersWithList()
-
-
-        users.let { it
-                .subscribeOn(Schedulers.io())
-                .distinct()
-                .subscribe {
-                    usersView.showUsers(it)
-                }
-        }
+        val usersSet = userRepository.getUsersWithSet()
+        usersView.showUsers(usersSet)
     }
-
-    override fun handleError(throwable: Throwable) {
-
-    }
-
 }

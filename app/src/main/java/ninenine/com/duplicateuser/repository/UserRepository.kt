@@ -4,6 +4,6 @@ import io.reactivex.Flowable
 import ninenine.com.duplicateuser.domain.User
 
 interface UserRepository {
-    fun getUsersWithSet(): Flowable<Set<User>>
-    fun getUsersWithList(): Flowable<List<User>>
+    fun getUsersWithSet(): Set<User>
+    fun getUsersWithList(): Flowable<User>
 }
