@@ -1,4 +1,4 @@
-package ninenine.com.duplicateuser.users
+package ninenine.com.duplicateuser.ui
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
