@@ -1,7 +1,7 @@
 package ninenine.com.duplicateuser.domain
 
-data class User(val id: String,
+data class User(var id: String,
                 var name: String,
-                val image: String,
+                var image: String,
                 var birthday: String,
-                val bio: String)
+                var bio: String)
