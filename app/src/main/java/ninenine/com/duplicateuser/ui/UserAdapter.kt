@@ -27,8 +27,10 @@ class UserAdapter(var users: MutableList<User>) : RecyclerView.Adapter<UsersHold
 class UsersHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     fun bind(user: User) {
         with(user){
+            itemView.user_photo.setImageURI(user.image)
             itemView.user_name.text = user.name
             itemView.user_birthday.text = user.birthday
+            itemView.user_bio.text = user.bio
         }
     }
 }

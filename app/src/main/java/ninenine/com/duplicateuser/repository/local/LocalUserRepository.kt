@@ -2,8 +2,6 @@ package ninenine.com.duplicateuser.repository.local
 
 import android.content.Context
 import com.squareup.moshi.Moshi
-import io.reactivex.Flowable
-import io.reactivex.Flowable.fromIterable
 import ninenine.com.duplicateuser.domain.User
 import ninenine.com.duplicateuser.functions.loadJSONFromAsset
 import ninenine.com.duplicateuser.repository.UserRepository
@@ -12,12 +10,14 @@ import javax.inject.Inject
 class LocalUserRepository @Inject constructor(private val context: Context,
                                                   private val moshi: Moshi) : UserRepository {
 
-    override fun getUsersWithSet(): Set<User> =
-            HashSet<User>(convertJsonStringToUsers()?.toMutableList())
+    val TAG = LocalUserRepository::class.java.simpleName
 
+    override fun getUsersWithSet(): Set<User>? =
+            convertJsonStringToUsers()?.toSet()
 
-    override fun getUsersWithList(): MutableList<User>? =
-            convertJsonStringToUsers()?.distinct()?.toMutableList()
+    override fun getUsersWithList(): List<User>? =
+            convertJsonStringToUsers()?.distinct()
+
 
     private fun convertJsonStringToUsers(): Array<User>? {
         val usersFromJsonFile = loadJSONFromAsset(context)

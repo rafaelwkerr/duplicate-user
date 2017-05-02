@@ -5,11 +5,9 @@ import android.support.annotation.IdRes
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import com.squareup.moshi.Moshi
-import ninenine.com.duplicateuser.domain.User
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import java.io.IOException
-import java.lang.reflect.Type
-
 
 fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.() -> Unit) {
     setSupportActionBar(findViewById(toolbarId) as Toolbar?)
@@ -18,8 +16,10 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
     }
 }
 
+fun convertDateISO8601(dateISO: String): String = DateTime(dateISO).toLocalDate().toString()
+
 fun loadJSONFromAsset(context: Context): String {
-    var json: String? = null
+    val json: String?
     try {
         val inputStream = context.assets.open("users.json")
         val size = inputStream.available()

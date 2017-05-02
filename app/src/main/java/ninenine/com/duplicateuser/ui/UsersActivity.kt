@@ -1,12 +1,10 @@
 package ninenine.com.duplicateuser.ui
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.content_main.*
-import ninenine.com.duplicateuser.DuplicateUserApplication
 import ninenine.com.duplicateuser.R
 import ninenine.com.duplicateuser.di.modules.UserModule
 import ninenine.com.duplicateuser.domain.User
@@ -30,7 +28,6 @@ class UsersActivity : AppCompatActivity(), UserContractView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //DuplicateUserApplication.appComponent.inject(this)
         component.inject(this)
 
         setupActionBar(R.id.toolbar) {
@@ -45,15 +42,11 @@ class UsersActivity : AppCompatActivity(), UserContractView {
     private fun setupRecycler() {
         val layoutManager = LinearLayoutManager(this)
         recycler_view_layour_recycler?.layoutManager = layoutManager
-        recycler_view_layour_recycler?.addItemDecoration(
-                DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recycler_view_layour_recycler?.adapter= userAdapter
     }
 
     override fun showUsers(users: Collection<User>) {
-        users?.let {
-            userAdapter = UserAdapter(users.toMutableList())
-            recycler_view_layour_recycler?.adapter= userAdapter
-        }
+        users?.let { userAdapter = UserAdapter(users.toMutableList()) }
     }
 
     override fun getContext(): Context { return this }
