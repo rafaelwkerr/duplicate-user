@@ -16,8 +16,8 @@ class LocalUserRepository @Inject constructor(private val context: Context,
             HashSet<User>(convertJsonStringToUsers()?.toMutableList())
 
 
-    override fun getUsersWithList(): Flowable<User> =
-            fromIterable(convertJsonStringToUsers()?.toMutableList()?.distinct())
+    override fun getUsersWithList(): MutableList<User>? =
+            convertJsonStringToUsers()?.distinct()?.toMutableList()
 
     private fun convertJsonStringToUsers(): Array<User>? {
         val usersFromJsonFile = loadJSONFromAsset(context)

@@ -21,7 +21,8 @@ class UserPresenterImpl @Inject constructor(private val userRepository: UserRepo
 
     private fun loadUsers() {
         val usersSet = userRepository.getUsersWithSet()
-        userContractView?.showUsers(usersSet.toMutableList())
+        val usersList = userRepository.getUsersWithList()
+        usersList?.let { userContractView?.showUsers(it) }
     }
 
 }
