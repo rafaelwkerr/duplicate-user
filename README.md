@@ -30,3 +30,6 @@ Para decidir qual opção usar, criei um teste de performance chamado ``` UserBe
 Set | Distinct
 --- | ---
 1 | 2 
+
+Inline-style: 
+![alt text](https://github.com/rafaelwkerr/my-files/blob/master/Screen%20Shot%202017-09-12%20at%2012.48.39%20AM.png "Output: ")
