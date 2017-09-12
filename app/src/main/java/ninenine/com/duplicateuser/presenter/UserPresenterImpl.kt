@@ -19,11 +19,10 @@ class UserPresenterImpl @Inject constructor(private val userRepository: UserRepo
     override fun attachView(view: UserContractView) {
         view.let {
             userContractView=view
-            loadUsers()
         }
     }
 
-    fun loadUsers() {
+    override fun loadUsers() {
         val userSetObservable = userRepository.getUsersWithSet()?.toObservable()
 
         userSetObservable?.let { it

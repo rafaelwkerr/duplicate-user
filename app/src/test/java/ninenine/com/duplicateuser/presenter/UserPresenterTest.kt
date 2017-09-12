@@ -18,7 +18,7 @@ class UserPresenterTest {
 
     @Mock private lateinit var userContractView: UserContractView
 
-    private lateinit var userPresenterImpl: UserPresenterImpl
+    private lateinit var userPresenter: UserPresenter
 
     private var users: MutableList<User> = mutableListOf()
 
@@ -27,8 +27,8 @@ class UserPresenterTest {
     fun setupUserPresenter() {
         initMocks(this)
 
-        userPresenterImpl = UserPresenterImpl(userRepository)
-        userPresenterImpl.attachView(userContractView)
+        userPresenter = UserPresenterImpl(userRepository)
+        userPresenter.attachView(userContractView)
 
         val userSteve = User(UUID.randomUUID().toString(), "Steve Jobs",
                 "http://adsoftheworld.com/files/steve-jobs.jpg", "1955-02-24T00:00:00Z",
@@ -49,7 +49,7 @@ class UserPresenterTest {
                 .`when`(userRepository)
                 .getUsersWithSet()
 
-        with(userPresenterImpl) { loadUsers() }
+        with(userPresenter) { loadUsers() }
         verify(userContractView, times(1)).showUsers(users)
         Assert.assertTrue(users.size == 2)
     }

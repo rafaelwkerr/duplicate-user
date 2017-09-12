@@ -3,20 +3,19 @@ package ninenine.com.duplicateuser.ui
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.filters.LargeTest
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.filters.MediumTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import android.view.View
 import ninenine.com.duplicateuser.R
 import ninenine.com.duplicateuser.RecyclerViewMatcher
-import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 
-@RunWith(AndroidJUnit4::class) @LargeTest class UsersActivityTest {
+@RunWith(AndroidJUnit4::class) @MediumTest class UsersActivityTest {
 
     @Rule @JvmField
     var mActivityTestRule = ActivityTestRule(UsersActivity::class.java)
@@ -56,7 +55,6 @@ import org.junit.runner.RunWith
     }
 
     companion object {
-
         fun withRecyclerView(recyclerViewId: Int): RecyclerViewMatcher {
             return RecyclerViewMatcher(recyclerViewId)
         }

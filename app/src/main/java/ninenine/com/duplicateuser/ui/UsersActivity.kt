@@ -32,6 +32,7 @@ class UsersActivity : AppCompatActivity(), UserContractView {
         }
 
         usersPresenter.attachView(this)
+        usersPresenter.loadUsers()
         setupRecycler()
 
     }
