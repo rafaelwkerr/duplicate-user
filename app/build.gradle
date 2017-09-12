@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -32,6 +33,7 @@ kapt {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:multidex:1.0.1'
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
@@ -40,7 +42,7 @@ dependencies {
     compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayoutVersion"
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile "io.reactivex:rxkotlin:$rootProject.ext.rxkotlinVersion"
+    compile "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxkotlinVersion"
     compile "net.danlew:android.joda:$rootProject.ext.jodaVersion"
     compile "com.facebook.fresco:fresco:$rootProject.ext.frescoVersion"
     compile "com.squareup.moshi:moshi:$rootProject.ext.moshiVersion"

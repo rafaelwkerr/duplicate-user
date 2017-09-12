@@ -1,11 +1,13 @@
 package ninenine.com.duplicateuser
 
 import android.app.Application
+import android.content.Context
 import com.facebook.drawee.backends.pipeline.Fresco
 import ninenine.com.duplicateuser.di.component.AppComponent
 import ninenine.com.duplicateuser.di.component.DaggerAppComponent
 import ninenine.com.duplicateuser.di.modules.AppModule
 import android.graphics.Bitmap
+import android.support.multidex.MultiDex
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import net.danlew.android.joda.JodaTimeAndroid
 
@@ -28,6 +30,11 @@ class DuplicateUserApplication : Application() {
                 .build()
         Fresco.initialize(this, config)
         JodaTimeAndroid.init(this)
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
 }

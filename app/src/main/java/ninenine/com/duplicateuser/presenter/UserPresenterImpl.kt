@@ -1,11 +1,11 @@
 package ninenine.com.duplicateuser.presenter
 
 import android.util.Log
+import io.reactivex.Flowable
+import io.reactivex.rxkotlin.toFlowable
 import ninenine.com.duplicateuser.functions.convertDateISO8601
 import ninenine.com.duplicateuser.repository.UserRepository
 import ninenine.com.duplicateuser.view.UserContractView
-import rx.Observable
-import rx.lang.kotlin.toObservable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,12 +23,12 @@ class UserPresenterImpl @Inject constructor(private val userRepository: UserRepo
     }
 
     override fun loadUsers() {
-        val userSetObservable = userRepository.getUsersWithSet()?.toObservable()
+        val userSetObservable = userRepository.getUsersWithSet()?.toFlowable()
 
         userSetObservable?.let { it
                     .flatMap {
                         it.birthday = convertDateISO8601(it.birthday)
-                        Observable.just(it)
+                        Flowable.just(it)
                     }
                     .toList()
                     .subscribe(

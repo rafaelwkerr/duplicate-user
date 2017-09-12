@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">DuplicateUser</string>
+    <string name="navigation_drawer_menu_ic_exit_app_desc">Sair</string>
+    <string name="navigation_drawer_open">Barra Lateral Aberta</string>
+    <string name="navigation_drawer_close">Barra Lateral Fechada</string>
 </resources>
