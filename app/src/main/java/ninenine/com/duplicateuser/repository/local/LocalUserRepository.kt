@@ -1,6 +1,7 @@
 package ninenine.com.duplicateuser.repository.local
 
 import android.content.Context
+import android.util.Log
 import com.squareup.moshi.Moshi
 import ninenine.com.duplicateuser.domain.User
 import ninenine.com.duplicateuser.functions.loadJSONFromAsset
@@ -10,7 +11,7 @@ import javax.inject.Inject
 class LocalUserRepository @Inject constructor(private val context: Context,
                                                   private val moshi: Moshi) : UserRepository {
 
-    val TAG = LocalUserRepository::class.java.simpleName
+    private val TAG = LocalUserRepository::class.java.simpleName
 
     override fun getUsersWithSet(): Set<User>? =
             convertJsonStringToUsers()?.toSet()
@@ -19,14 +20,14 @@ class LocalUserRepository @Inject constructor(private val context: Context,
             convertJsonStringToUsers()?.distinct()
 
 
-    private fun convertJsonStringToUsers(): Array<User>? {
+    fun convertJsonStringToUsers(): Array<User>? {
         val usersFromJsonFile = loadJSONFromAsset(context)
         val jsonAdapter = moshi.adapter<Array<User>>(Array<User>::class.java)
         var users: Array<User>? = null
         try {
             users = jsonAdapter.fromJson(usersFromJsonFile)
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e(TAG, "error=" + e)
         }
         return users
     }

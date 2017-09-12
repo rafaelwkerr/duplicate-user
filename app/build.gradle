@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "ninenine.com.duplicateuser"
-        minSdkVersion 19
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -33,30 +33,27 @@ kapt {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:recyclerview-v7:$support_version"
-    compile "com.android.support:cardview-v7:$support_version"
-    compile "com.android.support:design:$support_version"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayoutVersion"
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'io.reactivex:rxkotlin:1.0.0'
+    compile "io.reactivex:rxkotlin:$rootProject.ext.rxkotlinVersion"
+    compile "net.danlew:android.joda:$rootProject.ext.jodaVersion"
+    compile "com.facebook.fresco:fresco:$rootProject.ext.frescoVersion"
+    compile "com.squareup.moshi:moshi:$rootProject.ext.moshiVersion"
+    compile "com.squareup.moshi:moshi-kotlin:$rootProject.ext.moshiVersion"
+    compile "com.google.dagger:dagger:$rootProject.ext.dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger2Version"
 
-    /*compile "io.reactivex.rxjava2:rxjava:$rxjava2_version"
-    compile "io.reactivex.rxjava2:rxandroid:$rxjava2_version"*/
+    testCompile "junit:junit:$rootProject.ext.junitVersion"
+    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+    testCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+    testCompile "joda-time:joda-time:$rootProject.ext.jodaVersion"
 
-    compile 'net.danlew:android.joda:2.9.9'
-
-    compile "com.google.dagger:dagger:$dagger2_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-
-    compile 'com.facebook.fresco:fresco:1.5.0'
-
-    compile 'com.squareup.moshi:moshi:1.5.0'
-    compile 'com.squareup.moshi:moshi-kotlin:1.5.0'
-
-    testCompile 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }

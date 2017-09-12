@@ -16,14 +16,11 @@ import javax.inject.Inject
 
 class UsersActivity : AppCompatActivity(), UserContractView {
 
-    val TAG = UsersActivity::class.java.name
-
     @Inject lateinit var usersPresenter: UserPresenterImpl
 
     private var userAdapter: UserAdapter? = null
-    private val users: MutableList<User>? = mutableListOf()
 
-    val component by lazy { app.component.plus(UserModule(this)) }
+    private val component by lazy { app.component.plus(UserModule(this)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +43,7 @@ class UsersActivity : AppCompatActivity(), UserContractView {
     }
 
     override fun showUsers(users: Collection<User>) {
-        users?.let { userAdapter = UserAdapter(users.toMutableList()) }
+        users.let { userAdapter = UserAdapter(users.toMutableList()) }
     }
 
     override fun getContext(): Context { return this }

@@ -12,9 +12,9 @@ import javax.inject.Singleton
 @Singleton
 class UserPresenterImpl @Inject constructor(private val userRepository: UserRepository) : UserPresenter {
 
-    val TAG = UserPresenterImpl::class.java.simpleName
+    private val TAG = UserPresenterImpl::class.java.simpleName
 
-    private var userContractView: UserContractView? = null
+    var userContractView: UserContractView? = null
 
     override fun attachView(view: UserContractView) {
         view.let {
@@ -23,11 +23,10 @@ class UserPresenterImpl @Inject constructor(private val userRepository: UserRepo
         }
     }
 
-    private fun loadUsers() {
+    fun loadUsers() {
         val userSetObservable = userRepository.getUsersWithSet()?.toObservable()
-        val usersListObservable = userRepository.getUsersWithList()?.toObservable()
 
-        usersListObservable?.let { it
+        userSetObservable?.let { it
                     .flatMap {
                         it.birthday = convertDateISO8601(it.birthday)
                         Observable.just(it)
@@ -35,7 +34,7 @@ class UserPresenterImpl @Inject constructor(private val userRepository: UserRepo
                     .toList()
                     .subscribe(
                             {userContractView?.showUsers(it)},
-                            {Log.e(TAG, "user=" + it)}
+                            {Log.e(TAG, "error=" + it)}
                     )
         }
     }
